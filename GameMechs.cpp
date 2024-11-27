@@ -2,7 +2,8 @@
 
 GameMechs::GameMechs()
 {
-    
+    boardSizeX = 20;
+    boardSizeY = 10;
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
@@ -44,12 +45,12 @@ void GameMechs::incrementScore()
 
 int GameMechs::getBoardSizeX() const
 {
-
+    return boardSizeX;
 }
 
 int GameMechs::getBoardSizeY() const
 {
-
+    return boardSizeY;
 }
 
 
