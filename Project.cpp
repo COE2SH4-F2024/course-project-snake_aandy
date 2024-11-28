@@ -67,7 +67,7 @@ void DrawScreen(void)
     objPos rand3(5,6,'@');
     objPos currentplayer = myplayer -> getPlayerPos();
     GameMechs gameMechsInstance(30, 15);
-
+    
     
     MacUILib_clearScreen();    
     int i, k;
@@ -81,7 +81,6 @@ void DrawScreen(void)
                 {
                     border.setObjPos(i,j,'#');
                     MacUILib_printf("%c", border.symbol);
-                     
                 }
 
                 else if ((j == 0 || j == 9))
@@ -148,7 +147,7 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();    
+    MacUILib_clearScreen();
     delete myplayer;
     delete game;
     MacUILib_uninit();
