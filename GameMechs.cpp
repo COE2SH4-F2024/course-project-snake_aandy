@@ -15,7 +15,7 @@ GameMechs::GameMechs()
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
-    : input(0), exitFlag(false), loseFlag(false), score(0), boardSizeX(boardX), boardSizeY(boardY), food()
+    
 {
     input = 0;
     exitFlag = false;

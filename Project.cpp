@@ -37,18 +37,18 @@ int main(void)
 
     CleanUp();
 
-GameMechs* gameMechs = new GameMechs(30, 15); //Ayaan check this
+// GameMechs* gameMechs = new GameMechs(30, 15); //Ayaan check this
 
-gameMechs->setInput(MacUILib_getChar());
+// gameMechs->setInput(MacUILib_getChar());
 
-while (!gameMechs->getExitFlagStatus()) {
-    char input = gameMechs->getInput();
-    if (input == 'q') {
-        gameMechs->setExitTrue();
-    }
-    gameMechs->clearInput();
-}
-delete gameMechs;
+// while (!gameMechs->getExitFlagStatus()) {
+//     char input = gameMechs->getInput();
+//     if (input == 'q') {
+//         gameMechs->setExitTrue();
+//     }
+//     gameMechs->clearInput();
+// }
+// delete gameMechs;
 
 }
 
@@ -77,9 +77,7 @@ void DrawScreen(void)
 {
     objPos border;
     objPos space;
-    objPos rand1 (3,3,'!');
-    objPos rand2(2,2,'&');
-    objPos rand3(5,6,'@');
+
     objPos currentplayer = myplayer -> getPlayerPos();
     GameMechs gameMechsInstance(30, 15);
 
@@ -105,21 +103,6 @@ void DrawScreen(void)
                     MacUILib_printf("%c", border.symbol);  
                 }
 
-                else if (i == rand1.pos -> x && j == rand1.pos -> y)
-                {
-                    MacUILib_printf("%c", rand1.symbol);
-                }
-
-                else if (i == rand2.pos -> x && j == rand2.pos -> y)
-                {
-                    MacUILib_printf("%c", rand2.symbol);
-                    
-                }
-
-                else if (i == rand3.pos -> x && j == rand3.pos -> y)
-                {
-                    MacUILib_printf("%c", rand3.symbol);
-                }
 
                 else if (i == currentplayer.pos -> x && j == currentplayer.pos -> y)
                 {
