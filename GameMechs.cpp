@@ -2,6 +2,7 @@
 #include "MacUILib.h"
 
 GameMechs::GameMechs()
+    : input(0), exitFlag(false), loseFlag(false), score(0), boardSizeX(30), boardSizeY(15), food()
 {
     input = 0;
     exitFlag = false;
@@ -14,6 +15,7 @@ GameMechs::GameMechs()
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
+    : input(0), exitFlag(false), loseFlag(false), score(0), boardSizeX(boardX), boardSizeY(boardY), food()
 {
     input = 0;
     exitFlag = false;
@@ -24,73 +26,59 @@ GameMechs::GameMechs(int boardX, int boardY)
     boardSizeY = boardY;
 }
 
-// do you need a destructor?
-GameMechs::~GameMechs()
-{
-    
-}
-
-bool GameMechs::getExitFlagStatus() const
-{
-
-}
-
-bool GameMechs::getLoseFlagStatus() const
+bool GameMechs::getExitFlagStatus() const 
 {
     return exitFlag;
 }
-    
 
-char GameMechs::getInput()
+void GameMechs::setExitTrue() 
 {
-    if (MacUILib_hasChar())
-    {
-        input = MacUILib_getChar();
-    }
+    exitFlag = true;
+}
 
+bool GameMechs::getLoseFlagStatus() const 
+{
+    return loseFlag;
+}
 
+void GameMechs::setLoseFlag() 
+{
+    loseFlag = true;
+}
+
+char GameMechs::getInput()  
+{
     return input;
 }
 
-int GameMechs::getScore() const
+void GameMechs::setInput(char this_input) 
 {
-
+    input = this_input;
 }
 
-void GameMechs::incrementScore()
+void GameMechs::clearInput() 
 {
-    
+    input = 0; 
 }
 
-int GameMechs::getBoardSizeX() const
+int GameMechs::getScore() const 
+{
+    return score;
+}
+
+void GameMechs::incrementScore() 
+{
+    score++;
+}
+
+int GameMechs::getBoardSizeX() const 
 {
     return boardSizeX;
 }
 
-int GameMechs::getBoardSizeY() const
+int GameMechs::getBoardSizeY() const 
 {
     return boardSizeY;
-}
-
-
-void GameMechs::setExitTrue()
-{
-
-}
-
-void GameMechs::setLoseFlag()
-{
-    
-}
-
-void GameMechs::setInput(char this_input)
-{
-
-}
-
-void GameMechs::clearInput()
-{
-
 }
 
 // More methods should be added here

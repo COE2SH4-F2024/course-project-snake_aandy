@@ -37,6 +37,19 @@ int main(void)
 
     CleanUp();
 
+GameMechs* gameMechs = new GameMechs(30, 15); //Ayaan check this
+
+gameMechs->setInput(MacUILib_getChar());
+
+while (!gameMechs->getExitFlagStatus()) {
+    char input = gameMechs->getInput();
+    if (input == 'q') {
+        gameMechs->setExitTrue();
+    }
+    gameMechs->clearInput();
+}
+delete gameMechs;
+
 }
 
 
@@ -68,6 +81,8 @@ void DrawScreen(void)
     objPos rand2(2,2,'&');
     objPos rand3(5,6,'@');
     objPos currentplayer = myplayer -> getPlayerPos();
+    GameMechs gameMechsInstance(30, 15);
+
     
     MacUILib_clearScreen();    
     int i, k;
@@ -124,9 +139,20 @@ void DrawScreen(void)
         }
         MacUILib_printf("Current Player Character = %c, with coordinates [%d,%d]", currentplayer.symbol, currentplayer.pos -> x, currentplayer.pos -> y);
         MacUILib_printf("\nCurrent key pressed = %c", game -> getInput());
+        
+    if (gameMechsInstance.getInput() == 'd') {
+        gameMechsInstance.incrementScore();
+        MacUILib_printf("Score incremented: %d\n", gameMechsInstance.getScore());
+    }
 
+    if (gameMechsInstance.getInput() == 'l') {
+        gameMechsInstance.setLoseFlag();
+        MacUILib_printf("Lose flag set: %s\n", gameMechsInstance.getLoseFlagStatus() ? "true" : "false");
+    }
 
 }
+
+
 
 void LoopDelay(void)
 {
