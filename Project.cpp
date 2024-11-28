@@ -9,7 +9,7 @@ using namespace std;
 
 #define DELAY_CONST 100000
 
-bool exitFlag;
+
 Player *myplayer;
 GameMechs *game;
 
@@ -27,7 +27,7 @@ int main(void)
 
     Initialize();
 
-    while(exitFlag == false)  
+    while(game -> getExitFlagStatus() == false)  
     {
         GetInput();
         RunLogic();
@@ -47,18 +47,17 @@ void Initialize(void)
     game = new GameMechs();
     myplayer = new Player(game);
     
-
-    exitFlag = false;
 }
 
 void GetInput(void)
 {
-   
+   game -> getInput();
 }
 
 void RunLogic(void)
 {
-    
+    myplayer -> updatePlayerDir();
+    myplayer -> movePlayer();
 }
 
 void DrawScreen(void)
@@ -124,6 +123,8 @@ void DrawScreen(void)
         
         }
         MacUILib_printf("Current Player Character = %c, with coordinates [%d,%d]", currentplayer.symbol, currentplayer.pos -> x, currentplayer.pos -> y);
+        MacUILib_printf("\nCurrent key pressed = %c", game -> getInput());
+
 
 }
 

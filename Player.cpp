@@ -28,45 +28,96 @@ objPos Player::getPlayerPos() const
 void Player::updatePlayerDir()
 {
         // PPA3 input processing logic  
+    char input = mainGameMechsRef -> getInput();
 
-    // switch(input)        
-    // {
-    //     case 'w':
-    //             if (myDir != DOWN)
-    //             {
-    //                 myDir = UP;
-    //             }
-    //             break;
+    switch(input)        
+    {
+        case ' ':
+                mainGameMechsRef -> setExitTrue();
+                break;
 
-    //         case 'a':
-    //             if (myDir != RIGHT)
-    //             {
-    //                 myDir = LEFT;
-    //             }
-    //             break;
+        case 'w':
+                if (myDir != DOWN)
+                {
+                    myDir = UP;
+                }
+                break;
 
-    //         case 's':
-    //             if (myDir != UP)
-    //             {
-    //                 myDir = DOWN;
-    //             }
-    //             break;
+        case 'a':
+            if (myDir != RIGHT)
+            {
+                myDir = LEFT;
+            }
+            break;
 
-    //         case 'd':
-    //             if (myDir != LEFT)
-    //             {
-    //                 myDir = RIGHT;
-    //             }
-    //             break;
+        case 's':
+            if (myDir != UP)
+            {
+                myDir = DOWN;
+            }
+            break;
 
-    //         default:
-    //             break;
+        case 'd':
+            if (myDir != LEFT)
+            {
+                myDir = RIGHT;
+            }
+            break;
+
+        default:
+            break;
 }
-
+}
 
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
+    switch(myDir)
+    {
+        
+        case STOP:
+        default:
+            playerPos.pos -> x = mainGameMechsRef -> getBoardSizeX()/2;
+            playerPos.pos -> y = mainGameMechsRef -> getBoardSizeY()/2;
+            break;
+
+
+        case UP:
+            playerPos.pos -> y--;
+            if (playerPos.pos -> y <= 0)
+            {
+                playerPos.pos -> y = 8;
+            }
+            break;
+
+        case DOWN:
+            playerPos.pos -> y++;
+            if (playerPos.pos -> y >= 9)
+            {
+                playerPos.pos -> y = 1;
+            }
+            break;
+            
+
+        case RIGHT:
+            playerPos.pos -> x++;
+            if (playerPos.pos -> x >= 19)
+            {
+                playerPos.pos -> x = 1;
+            }
+            break;
+
+        case LEFT:
+            playerPos.pos -> x--;
+            if (playerPos.pos -> x <= 0)
+            {
+                playerPos.pos -> x = 18;
+            }
+            break;
+
+        
+            
+    }
 }
 
 // More methods to be added
