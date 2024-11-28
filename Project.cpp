@@ -21,7 +21,6 @@ void LoopDelay(void);
 void CleanUp(void);
 
 
-
 int main(void)
 {
 
@@ -37,18 +36,18 @@ int main(void)
 
     CleanUp();
 
-// GameMechs* gameMechs = new GameMechs(30, 15); //Ayaan check this
+GameMechs* gameMechs = new GameMechs(30, 15); //Ayaan check this
 
-// gameMechs->setInput(MacUILib_getChar());
+gameMechs->setInput(MacUILib_getChar());
 
-// while (!gameMechs->getExitFlagStatus()) {
-//     char input = gameMechs->getInput();
-//     if (input == 'q') {
-//         gameMechs->setExitTrue();
-//     }
-//     gameMechs->clearInput();
-// }
-// delete gameMechs;
+while (!gameMechs->getExitFlagStatus()) {
+    char input = gameMechs->getInput();
+    if (input == 'q') {
+        gameMechs->setExitTrue();
+    }
+    gameMechs->clearInput();
+}
+delete gameMechs;
 
 }
 
@@ -132,6 +131,7 @@ void DrawScreen(void)
         gameMechsInstance.setLoseFlag();
         MacUILib_printf("Lose flag set: %s\n", gameMechsInstance.getLoseFlagStatus() ? "true" : "false");
     }
+
 
 }
 
