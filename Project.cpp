@@ -35,20 +35,6 @@ int main(void)
     }
 
     CleanUp();
-
-GameMechs* gameMechs = new GameMechs(30, 15); //Ayaan check this
-
-gameMechs->setInput(MacUILib_getChar());
-
-while (!gameMechs->getExitFlagStatus()) {
-    char input = gameMechs->getInput();
-    if (input == 'q') {
-        gameMechs->setExitTrue();
-    }
-    gameMechs->clearInput();
-}
-delete gameMechs;
-
 }
 
 
