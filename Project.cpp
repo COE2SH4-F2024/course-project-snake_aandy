@@ -3,6 +3,7 @@
 #include "objPos.h"
 #include "GameMechs.h"
 #include "Player.h"
+#include "Food.h"
 
 
 using namespace std;
@@ -12,6 +13,7 @@ using namespace std;
 
 Player *myplayer;
 GameMechs *game;
+Food* food = nullptr;
 
 void Initialize(void);
 void GetInput(void);
@@ -43,7 +45,10 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
     game = new GameMechs(30,30);
-    myplayer = new Player(game);
+    myplayer = new Player(game, food);
+    food = new Food(game);
+
+    food->generateFood(&myplayer->getPlayerPos()); 
     
 }
 
@@ -124,5 +129,7 @@ void CleanUp(void)
     MacUILib_clearScreen();
     delete myplayer;
     delete game;
+    delete food;
+    food = nullptr;
     MacUILib_uninit();
 }
