@@ -26,9 +26,9 @@ class Player
         void movePlayer();
 
         // More methods to be added here
-        explicit Player(GameMechs* thisGMRef);
-        objPos getPlayerPos() const;    
-        void movePlayer(char dir);     
+        // explicit Player(GameMechs* thisGMRef);
+        // objPos getPlayerPos() const;    
+        // void movePlayer(char dir);     
 
     private:
         objPos playerPos; // Upgrade this in iteration 3.       
@@ -36,8 +36,8 @@ class Player
 
         // Need a reference to the Main Game Mechanisms
         GameMechs* mainGameMechsRef;
-        objPos playerPos;               
-        GameMechs* mainGameMechsRef;    
+        // objPos playerPos;               
+        // GameMechs* mainGameMechsRef;    
 
 };
 

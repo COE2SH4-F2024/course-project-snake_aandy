@@ -13,10 +13,9 @@ using namespace std;
 
 Player *myplayer;
 GameMechs *game;
-Food* food = nullptr;
+Food* food;
 
 void Initialize(void);
-void GetInput(void);
 void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
@@ -30,7 +29,6 @@ int main(void)
 
     while(game -> getExitFlagStatus() == false)  
     {
-        GetInput();
         RunLogic();
         DrawScreen();
         LoopDelay();
@@ -52,15 +50,15 @@ void Initialize(void)
     
 }
 
-void GetInput(char& input) {
-    input = game->getInput();
+// void GetInput(char& input) {
+//     input = game->getInput();
 
-    if (input == ' ') {
-        game->setExitTrue();
-    } else if (input == 'r') {
-        food->generateFood(&myplayer->getPlayerPos()); 
-    }
-}
+//     if (input == ' ') {
+//         game->setExitTrue();
+//     } else if (input == 'r') {
+//         food->generateFood(&myplayer->getPlayerPos()); 
+//     }
+// }
 
 void RunLogic(void)
 {
@@ -76,19 +74,34 @@ void DrawScreen(void)
     objPos foodPos = food->getFoodPos();
 
     MacUILib_clearScreen();
-    for (int j = 0; j < game->getBoardSizeY(); j++) {
-        for (int i = 0; i < game->getBoardSizeX(); i++) {
-            if (i == 0 || i == game->getBoardSizeX() - 1) {
+    for (int j = 0; j < game->getBoardSizeY(); j++) 
+    {
+        for (int i = 0; i < game->getBoardSizeX(); i++) 
+        {
+            if (i == 0 || i == game->getBoardSizeX() - 1) 
+            {
                 border.setObjPos(i, j, '#');
                 MacUILib_printf("%c", border.symbol);
-            } else if ((j == 0 || j == game->getBoardSizeY() - 1)) {
+            } 
+            
+            else if ((j == 0 || j == game->getBoardSizeY() - 1)) 
+            {
                 border.setObjPos(i, j, '#');
                 MacUILib_printf("%c", border.symbol);
-            } else if (i == currentplayer.pos->x && j == currentplayer.pos->y) {
+            } 
+
+            else if (i == currentplayer.pos->x && j == currentplayer.pos->y) 
+            {
                 MacUILib_printf("%c", currentplayer.symbol);
-            } else if (i == foodPos.pos->x && j == foodPos.pos->y) {
+            } 
+
+            else if (i == foodPos.pos->x && j == foodPos.pos->y) 
+            {
                 MacUILib_printf("%c", foodPos.symbol);
-            } else {
+            } 
+
+            else 
+            {
                 space.setObjPos(i, j, ' ');
                 MacUILib_printf("%c", space.symbol);
             }
