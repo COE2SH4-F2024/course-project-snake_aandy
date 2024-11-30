@@ -1,5 +1,5 @@
 #include "Food.h"
-#include <cstdlib>
+#include <cstdlib> 
 
 Food::Food(GameMechs* gameMechsRef) {
     mainGameMechsRef = gameMechsRef;
@@ -7,20 +7,20 @@ Food::Food(GameMechs* gameMechsRef) {
 }
 
 void Food::generateFood(objPos* playerPos) {
-    int xSize = mainGameMechsRef->getBoardSizeX() - 2;
-    int ySize = mainGameMechsRef->getBoardSizeY() - 2;
+    int xSize = mainGameMechsRef->getBoardSizeX() - 2; 
+    int ySize = mainGameMechsRef->getBoardSizeY() - 2; 
 
     while (true) {
-        int x = rand() % xSize + 1;
-        int y = rand() % ySize + 1;
+        int x = rand() % xSize + 1; 
+        int y = rand() % ySize + 1; 
 
         if (playerPos == nullptr || (x != playerPos->pos->x || y != playerPos->pos->y)) {
             foodPos.setObjPos(x, y, '@'); 
-            break;
+            break; 
         }
     }
 }
 
 objPos Food::getFoodPos() const {
-    return foodPos;
+    return foodPos; 
 }
