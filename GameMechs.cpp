@@ -24,6 +24,9 @@ GameMechs::GameMechs(int boardX, int boardY)
     boardSizeY = boardY;
 }
 
+GameMechs::~GameMechs() {
+    
+}
 bool GameMechs::getExitFlagStatus() const
 {
     return exitFlag;

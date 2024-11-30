@@ -42,7 +42,7 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-    game = new GameMechs();
+    game = new GameMechs(30,30);
     myplayer = new Player(game);
     
 }
@@ -70,18 +70,18 @@ void DrawScreen(void)
     MacUILib_clearScreen();    
     int i, k;
     int j;
-    for (j = 0; j < 10; j++)
+    for (j = 0; j < game ->getBoardSizeY(); j++)
     {
-        for(i = 0; i < 20; i++)
+        for(i = 0; i < game ->getBoardSizeX(); i++)
         {
 
-                if (i == 0 || i == 19)
+                if (i == 0 || i == game ->getBoardSizeX() - 1)
                 {
                     border.setObjPos(i,j,'#');
                     MacUILib_printf("%c", border.symbol);
                 }
 
-                else if ((j == 0 || j == 9))
+                else if ((j == 0 || j == game ->getBoardSizeY() - 1 ))
                 {
                     border.setObjPos(i,j,'#');
                     MacUILib_printf("%c", border.symbol);  
@@ -107,16 +107,7 @@ void DrawScreen(void)
         MacUILib_printf("Current Player Character = %c, with coordinates [%d,%d]", currentplayer.symbol, currentplayer.pos -> x, currentplayer.pos -> y);
         MacUILib_printf("\nCurrent key pressed = %c", game -> getInput());
         
-    if (gameMechsInstance.getInput() == 'd') {
-        gameMechsInstance.incrementScore();
-        MacUILib_printf("Score incremented: %d\n", gameMechsInstance.getScore());
-    }
-
-    if (gameMechsInstance.getInput() == 'l') {
-        gameMechsInstance.setLoseFlag();
-        MacUILib_printf("Lose flag set: %s\n", gameMechsInstance.getLoseFlagStatus() ? "true" : "false");
-    }
-
+    
 
 }
 
