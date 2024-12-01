@@ -33,7 +33,7 @@ void objPosArrayList::insertHead(objPos thisPos)
         aList[i] = aList[i-1];
     }
 
-    aList[0].setObjPos(thisPos);
+    aList[0] = thisPos;
     listSize++;
 }
 
@@ -44,7 +44,7 @@ void objPosArrayList::insertTail(objPos thisPos)
         return;
     }
 
-    aList[listSize].setObjPos(thisPos);
+    aList[listSize] = thisPos;
     listSize++;
 }
 
@@ -84,15 +84,15 @@ objPos objPosArrayList::getTailElement() const
 
 objPos objPosArrayList::getElement(int index) const
 {
-    if (index < 0)
-    {
-        index = 0;
-    }
+    // if (index < 0)
+    // {
+    //     index = 0;
+    // }
 
-    else if (index >= listSize)
-    {
-        index = listSize - 1;
-    }
+    // else if (index >= listSize)
+    // {
+    //     index = listSize - 1;
+    // }
 
     return aList[index];
 }
