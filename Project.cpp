@@ -143,7 +143,8 @@ void DrawScreen(void)
         
         }
         MacUILib_printf("\nCurrent key pressed = %c", game -> getInput());
-        MacUILib_printf("\nScore: %d", game -> getScore());
+        MacUILib_printf("\nScore: %d\n", game -> getScore());
+        MacUILib_printf("%d,%d",foodPos.pos ->x, foodPos.pos -> y );
         
     
 
@@ -167,7 +168,7 @@ void CleanUp(void)
 
     else
     {
-        MacUILib_printf("I'll see you next time!");
+        MacUILib_printf("It seems you have exited! I'll see you another time!");
     }
     delete myplayer;
     delete game;
