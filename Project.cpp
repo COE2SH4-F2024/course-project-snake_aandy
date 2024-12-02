@@ -3,6 +3,7 @@
 #include "objPos.h"
 #include "GameMechs.h"
 #include "Player.h"
+#include "Food.h"
 
 
 using namespace std;
@@ -12,10 +13,8 @@ using namespace std;
 
 Player *myplayer;
 GameMechs *game;
-objPos foodPos;
 
 void Initialize(void);
-void GetInput(void);
 void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
@@ -29,7 +28,6 @@ int main(void)
 
     while(game -> getExitFlagStatus() == false)  
     {
-        GetInput();
         RunLogic();
         DrawScreen();
         LoopDelay();
@@ -45,18 +43,14 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-    game = new GameMechs(30,20);
-    myplayer = new Player(game); 
-    game -> generateFood(myplayer -> getPlayerPos());
-    
+    game = new GameMechs(30,30);
+    myplayer = new Player(game);
     
 }
 
 void GetInput(void)
 {
-   
-    
-
+   game -> getInput();
 }
 
 void RunLogic(void)
@@ -72,82 +66,49 @@ void DrawScreen(void)
     objPos border;
     objPos space;
 
-    objPosArrayList* currentplayer = myplayer -> getPlayerPos();
-    int playersize = currentplayer->getSize();
-
+    objPos currentplayer = myplayer -> getPlayerPos();
+    GameMechs gameMechsInstance(30, 15);
     
     
     MacUILib_clearScreen();    
     int i, k;
     int j;
-    int boardX = game ->getBoardSizeX();
-    int boardY = game ->getBoardSizeY();
-    foodPos = game -> getFoodPos();
-    bool proceed;
-    
-
-    for (j = 0; j < boardY; j++)
+    for (j = 0; j < game ->getBoardSizeY(); j++)
     {
-        for(i = 0; i < boardX; i++)
+        for(i = 0; i < game ->getBoardSizeX(); i++)
         {
-            proceed = true;
 
-            for (k = 0; k < playersize; k++)
-            {
-                objPos thisseg = currentplayer -> getElement(k);
-
-                if (i == thisseg.pos -> x && j == thisseg.pos -> y )
+                if (i == 0 || i == game ->getBoardSizeX() - 1)
                 {
-                    MacUILib_printf("%c", thisseg.symbol);
-                    proceed = false;
-
+                    border.setObjPos(i,j,'#');
+                    MacUILib_printf("%c", border.symbol);
                 }
-            }
 
-            if (proceed == true)
-            {
-                    if (i == 0 || i == boardX - 1)
-                    {
-                        border.setObjPos(i,j,'#');
-                        MacUILib_printf("%c", border.symbol);
-                    }
-
-                    else if ((j == 0 || j == boardY - 1 ))
-                    {
-                        border.setObjPos(i,j,'#');
-                        MacUILib_printf("%c", border.symbol);  
-                    }
-
-                    else if (i == foodPos.pos -> x && j == foodPos.pos -> y)
-                    {
-                        MacUILib_printf("%c", foodPos.symbol);
-                    }
+                else if ((j == 0 || j == game ->getBoardSizeY() - 1 ))
+                {
+                    border.setObjPos(i,j,'#');
+                    MacUILib_printf("%c", border.symbol);  
+                }
 
 
-                    // else if (i == currentplayer.pos -> x && j == currentplayer.pos -> y)
-                    // {
-                    //     MacUILib_printf("%c", currentplayer.symbol);
-                    // }
+                else if (i == currentplayer.pos -> x && j == currentplayer.pos -> y)
+                {
+                    MacUILib_printf("%c", currentplayer.symbol);
+                }
 
-                    else
-                    {
-                        space.setObjPos(i, j, ' ');
-                        MacUILib_printf("%c", space.symbol); 
-                    }
-            }
-
-            else 
-            {
-                continue;
-            }
+                else
+                {
+                    space.setObjPos(i, j, ' ');
+                    MacUILib_printf("%c", space.symbol); 
+                }
         
         }
         printf("\n");
 
         
         }
+        MacUILib_printf("Current Player Character = %c, with coordinates [%d,%d]", currentplayer.symbol, currentplayer.pos -> x, currentplayer.pos -> y);
         MacUILib_printf("\nCurrent key pressed = %c", game -> getInput());
-        MacUILib_printf("\nScore: %d", game -> getScore());
         
     
 
@@ -175,5 +136,7 @@ void CleanUp(void)
     }
     delete myplayer;
     delete game;
+    delete food;
+    food = nullptr;
     MacUILib_uninit();
 }

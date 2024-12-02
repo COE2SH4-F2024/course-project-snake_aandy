@@ -1,7 +1,7 @@
 #include "Player.h"
 
 
-Player::Player(GameMechs* thisGMRef)
+Player::Player(GameMechs* thisGMRef, Food* thisFDRef)
 {
     mainGameMechsRef = thisGMRef;
     playerPosList = new objPosArrayList();
