@@ -1,10 +1,5 @@
 #include "objPosArrayList.h"
 
-<<<<<<< HEAD
-// Paste your Tested implementation here.
-// Paste your Tested implementation here.
-// Paste your Tested implementation here.
-=======
 // Check lecture contents on general purpose array list construction, 
 // and modify it to support objPos array list construction.
 
@@ -101,4 +96,3 @@ objPos objPosArrayList::getElement(int index) const
 
     return aList[index];
 }
->>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56

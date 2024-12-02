@@ -12,10 +12,7 @@ using namespace std;
 
 Player *myplayer;
 GameMechs *game;
-<<<<<<< HEAD
-=======
 objPos foodPos;
->>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56
 
 void Initialize(void);
 void GetInput(void);
@@ -48,21 +45,18 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-<<<<<<< HEAD
-    game = new GameMechs(30,30);
-    myplayer = new Player(game);
-=======
     game = new GameMechs(20,10);
     myplayer = new Player(game); 
     game -> generateFood(myplayer -> getPlayerPos());
     
->>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56
     
 }
 
 void GetInput(void)
 {
-   game -> getInput();
+   
+    
+
 }
 
 void RunLogic(void)
@@ -77,50 +71,64 @@ void DrawScreen(void)
 {
     objPos border;
     objPos space;
-<<<<<<< HEAD
-=======
 
     objPosArrayList* currentplayer = myplayer -> getPlayerPos();
     int playersize = currentplayer->getSize();
->>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56
 
-    objPos currentplayer = myplayer -> getPlayerPos();
-    GameMechs gameMechsInstance(30, 15);
     
     
     MacUILib_clearScreen();    
     int i, k;
     int j;
-    for (j = 0; j < game ->getBoardSizeY(); j++)
+    int boardX = game ->getBoardSizeX();
+    int boardY = game ->getBoardSizeY();
+    foodPos = game -> getFoodPos();
+    bool proceed;
+    
+
+    for (j = 0; j < boardY; j++)
     {
-        for(i = 0; i < game ->getBoardSizeX(); i++)
+        for(i = 0; i < boardX; i++)
         {
+            proceed = true;
 
-                if (i == 0 || i == game ->getBoardSizeX() - 1)
+            for (k = 0; k < playersize; k++)
+            {
+                objPos thisseg = currentplayer -> getElement(k);
+
+                if (i == thisseg.pos -> x && j == thisseg.pos -> y )
                 {
-                    border.setObjPos(i,j,'#');
-                    MacUILib_printf("%c", border.symbol);
-                }
+                    MacUILib_printf("%c", thisseg.symbol);
+                    proceed = false;
 
-                else if ((j == 0 || j == game ->getBoardSizeY() - 1 ))
-                {
-                    border.setObjPos(i,j,'#');
-                    MacUILib_printf("%c", border.symbol);  
                 }
+            }
+
+            if (proceed == true)
+            {
+                    if (i == 0 || i == boardX - 1)
+                    {
+                        border.setObjPos(i,j,'#');
+                        MacUILib_printf("%c", border.symbol);
+                    }
+
+                    else if ((j == 0 || j == boardY - 1 ))
+                    {
+                        border.setObjPos(i,j,'#');
+                        MacUILib_printf("%c", border.symbol);  
+                    }
+
+                    else if (i == foodPos.pos -> x && j == foodPos.pos -> y)
+                    {
+                        MacUILib_printf("%c", foodPos.symbol);
+                    }
 
 
-                else if (i == currentplayer.pos -> x && j == currentplayer.pos -> y)
-                {
-                    MacUILib_printf("%c", currentplayer.symbol);
-                }
+                    // else if (i == currentplayer.pos -> x && j == currentplayer.pos -> y)
+                    // {
+                    //     MacUILib_printf("%c", currentplayer.symbol);
+                    // }
 
-<<<<<<< HEAD
-                else
-                {
-                    space.setObjPos(i, j, ' ');
-                    MacUILib_printf("%c", space.symbol); 
-                }
-=======
                     else
                     {
                         space.setObjPos(i, j, ' ');
@@ -128,15 +136,14 @@ void DrawScreen(void)
                     }
             }
 
->>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56
         
         }
         printf("\n");
 
         
         }
-        MacUILib_printf("Current Player Character = %c, with coordinates [%d,%d]", currentplayer.symbol, currentplayer.pos -> x, currentplayer.pos -> y);
         MacUILib_printf("\nCurrent key pressed = %c", game -> getInput());
+        MacUILib_printf("\nScore: %d", game -> getScore());
         
     
 
