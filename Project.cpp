@@ -3,7 +3,6 @@
 #include "objPos.h"
 #include "GameMechs.h"
 #include "Player.h"
-#include "Food.h"
 
 
 using namespace std;
@@ -13,8 +12,13 @@ using namespace std;
 
 Player *myplayer;
 GameMechs *game;
+<<<<<<< HEAD
+=======
+objPos foodPos;
+>>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56
 
 void Initialize(void);
+void GetInput(void);
 void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
@@ -28,6 +32,7 @@ int main(void)
 
     while(game -> getExitFlagStatus() == false)  
     {
+        GetInput();
         RunLogic();
         DrawScreen();
         LoopDelay();
@@ -43,8 +48,15 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
+<<<<<<< HEAD
     game = new GameMechs(30,30);
     myplayer = new Player(game);
+=======
+    game = new GameMechs(20,10);
+    myplayer = new Player(game); 
+    game -> generateFood(myplayer -> getPlayerPos());
+    
+>>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56
     
 }
 
@@ -65,6 +77,12 @@ void DrawScreen(void)
 {
     objPos border;
     objPos space;
+<<<<<<< HEAD
+=======
+
+    objPosArrayList* currentplayer = myplayer -> getPlayerPos();
+    int playersize = currentplayer->getSize();
+>>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56
 
     objPos currentplayer = myplayer -> getPlayerPos();
     GameMechs gameMechsInstance(30, 15);
@@ -96,11 +114,21 @@ void DrawScreen(void)
                     MacUILib_printf("%c", currentplayer.symbol);
                 }
 
+<<<<<<< HEAD
                 else
                 {
                     space.setObjPos(i, j, ' ');
                     MacUILib_printf("%c", space.symbol); 
                 }
+=======
+                    else
+                    {
+                        space.setObjPos(i, j, ' ');
+                        MacUILib_printf("%c", space.symbol); 
+                    }
+            }
+
+>>>>>>> 9e55b9ec949be747bb99164213970f68777f3f56
         
         }
         printf("\n");
@@ -136,7 +164,5 @@ void CleanUp(void)
     }
     delete myplayer;
     delete game;
-    delete food;
-    food = nullptr;
     MacUILib_uninit();
 }
