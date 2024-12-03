@@ -28,9 +28,9 @@ objPosArrayList* Player::getPlayerPos() const
 void Player::updatePlayerDir()
 {
         // PPA3 input processing logic  
-    char input = mainGameMechsRef -> getInput();
+    char input = mainGameMechsRef -> getInput(); //asynchronous input collection
 
-    switch(input)        
+    switch(input)   //FSM state transition depending on key pressed
     {
         case ' ':
                 mainGameMechsRef -> setExitTrue();
@@ -73,8 +73,8 @@ void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
 
-    objPos temp = playerPosList -> getHeadElement();
-    switch(myDir)
+    objPos temp = playerPosList -> getHeadElement(); 
+    switch(myDir) //calculate the next position
     {
         
         case STOP:
@@ -120,7 +120,7 @@ void Player::movePlayer()
     }
 
 
-    if (myDir != STOP)
+    if (myDir != STOP) //only grow the 
     {
         for (int k = 0; k < playerPosList ->getSize(); k++)
         {
