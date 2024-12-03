@@ -8,8 +8,8 @@ Player::Player(GameMechs* thisGMRef)
     playerPosList = new objPosArrayList();
     myDir = STOP;
 
-    objPos headPos(mainGameMechsRef -> getBoardSizeX() / 2, mainGameMechsRef -> getBoardSizeY() / 2, '*');
-    playerPosList->insertHead(headPos);
+    objPos headPos(mainGameMechsRef -> getBoardSizeX() / 2, mainGameMechsRef -> getBoardSizeY() / 2, '*'); //initialize head of snake to middle of gameboard
+    playerPosList->insertHead(headPos); //add head to the first position of the playerPosList
 }
 
 
@@ -120,12 +120,12 @@ void Player::movePlayer()
     }
 
 
-    if (myDir != STOP) //only grow the 
+    if (myDir != STOP) //only grow the the length of the snake/move the snake if you are not in the stop position
     {
         for (int k = 0; k < playerPosList ->getSize(); k++)
         {
             objPos reference = playerPosList -> getElement(k);
-            objPos* referenceptr = &reference;
+            objPos* referenceptr = &reference; //must create an additional pointer to hold the address of the playerPosList element as you cannot input the line above into the function parameter directly
             if (temp.isPosEqual(referenceptr))
             {
                 mainGameMechsRef -> setExitTrue();
@@ -139,18 +139,18 @@ void Player::movePlayer()
 
         
             objPos food = (mainGameMechsRef -> getFoodPos());
-            objPos *foods = &food;
-            if (!temp.isPosEqual(foods))
+            objPos *foods = &food; //get the pointer to the food objPos object
+            if (!temp.isPosEqual(foods)) //check if the next calculated step of the snake is not equal to the food position (non-consumption)
             {   
-                playerPosList -> insertHead(temp);
+                playerPosList -> insertHead(temp); //regular movement algorithm
                 playerPosList -> removeTail();
             }
 
             else
             {
-                playerPosList -> insertHead(temp);
-                mainGameMechsRef -> generateFood(playerPosList);
-                mainGameMechsRef -> incrementScore();
+                playerPosList -> insertHead(temp); //if there is consumption, insert head but DO NOT remove tail
+                mainGameMechsRef -> generateFood(playerPosList); 
+                mainGameMechsRef -> incrementScore(); //generate new food and increase score
             }
         }
 

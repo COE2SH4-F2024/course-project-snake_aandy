@@ -45,9 +45,9 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-    game = new GameMechs(20,10);
+    game = new GameMechs(20,10); //game board 20 by 10
     myplayer = new Player(game); 
-    game -> generateFood(myplayer -> getPlayerPos());
+    game -> generateFood(myplayer -> getPlayerPos()); //initial food generation
     
     
 }
@@ -55,16 +55,12 @@ void Initialize(void)
 void GetInput(void)
 {
    
-    
-
 }
 
 void RunLogic(void)
 {
     myplayer -> updatePlayerDir();
-    myplayer -> movePlayer();
-
-
+    myplayer -> movePlayer(); //update player snake FSM and move snake
 }
 
 void DrawScreen(void)
@@ -86,11 +82,11 @@ void DrawScreen(void)
     bool proceed;
     
 
-    for (j = 0; j < boardY; j++)
+    for (j = 0; j < boardY; j++) //board frame print algorithm
     {
         for(i = 0; i < boardX; i++)
         {
-            proceed = true;
+            proceed = true; //proceed flag (if you print a segment of a snake at a certain i,j, no need to print anything else)
 
             for (k = 0; k < playersize; k++)
             {
@@ -99,12 +95,12 @@ void DrawScreen(void)
                 if (i == thisseg.pos -> x && j == thisseg.pos -> y )
                 {
                     MacUILib_printf("%c", thisseg.symbol);
-                    proceed = false;
+                    proceed = false; //if you are printing a segment of the snake, DO NOT print anything else (false)
 
                 }
             }
 
-            if (proceed == true)
+            if (proceed == true) //only proceed if no snake segment was printed
             {
                     if (i == 0 || i == boardX - 1)
                     {
