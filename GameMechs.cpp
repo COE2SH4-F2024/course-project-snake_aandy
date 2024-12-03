@@ -12,7 +12,6 @@ GameMechs::GameMechs()
     boardSizeY = 10;
 
     food.setObjPos(-10,-10, 'o');
-
 }
 
 GameMechs::GameMechs(int boardX, int boardY)

@@ -151,7 +151,7 @@ void CleanUp(void)
     MacUILib_clearScreen();
     if (game -> getLoseFlagStatus() == true)
     {
-        MacUILib_printf("GAME OVER!\nFinal Score: %d", game -> getScore());
+        MacUILib_printf("GAME OVER!\nFinal Score: %d", game -> getScore()); //different ending messages depending on whether the game was exited or game was lost
     }
 
     else
