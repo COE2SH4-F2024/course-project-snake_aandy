@@ -28,7 +28,8 @@ GameMechs::GameMechs(int boardX, int boardY)
     food.setObjPos(-10,-10, 'o');
 }
 
-GameMechs::~GameMechs() {
+GameMechs::~GameMechs() 
+{
     
 }
 bool GameMechs::getExitFlagStatus() const

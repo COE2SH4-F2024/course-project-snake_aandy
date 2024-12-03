@@ -9,15 +9,7 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
 
     objPos headPos(mainGameMechsRef -> getBoardSizeX() / 2, mainGameMechsRef -> getBoardSizeY() / 2, '*');
-    // objPos test1(11,5,'*');
-    // objPos test2(12,5,'*');
-    // playerPos.pos -> x = mainGameMechsRef -> getBoardSizeX() / 2;
-    // playerPos.pos -> y = mainGameMechsRef -> getBoardSizeY() / 2;
-    // playerPos.symbol = '*';
     playerPosList->insertHead(headPos);
-    // playerPosList -> insertTail(test1);
-    // playerPosList -> insertTail(test2);
-    // more actions to be included
 }
 
 

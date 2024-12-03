@@ -123,12 +123,6 @@ void DrawScreen(void)
                         MacUILib_printf("%c", foodPos.symbol);
                     }
 
-
-                    // else if (i == currentplayer.pos -> x && j == currentplayer.pos -> y)
-                    // {
-                    //     MacUILib_printf("%c", currentplayer.symbol);
-                    // }
-
                     else
                     {
                         space.setObjPos(i, j, ' ');
@@ -142,9 +136,7 @@ void DrawScreen(void)
 
         
         }
-        MacUILib_printf("\nCurrent key pressed = %c", game -> getInput());
         MacUILib_printf("\nScore: %d\n", game -> getScore());
-        MacUILib_printf("%d,%d",foodPos.pos ->x, foodPos.pos -> y );
         
     
 
